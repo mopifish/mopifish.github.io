@@ -3,27 +3,22 @@
   --background-color:  #ffffff;
   --primary-color:  #ffffff;
   --secondary-color: #ffffff;
-  --accent-color:  #ffffff;
+  --accent-color:  #1db345;
 }
 
 body {
   background-color : var(--background-color);
   color : var(--text-color);
   font-family: "Lucida Console", monospace;
-  margin: 0px;
-  padding: 0px;
-  overflow-x: hidden;
+  margin: auto;
+  max-width: 1280px;
 }
 
 header {
   color : var(--text-color);   
-  background-color: var(--accent-color);
   padding: 10px;
   margin-left: 50px;
   text-align: left;
-  border-style: dashed;
-  border-width: 3px;
-  border-color: var(--background-color);
 }
 h1 {
   font-size: 25px;
@@ -31,8 +26,8 @@ h1 {
 
 
 main {
-  position: ;
   margin-top: 20px;
+  margin-inline: 100px;
 }
 
  a, a:focus, a:active {
