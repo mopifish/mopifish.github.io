@@ -1,7 +1,8 @@
 var constraint_distance = 50
 
 var constraint = new Path.Circle(view.center, constraint_distance);
-constraint.strokeColor = 'black';
+constraint.strokeColor = '#636363';
+constraint.dashArray = [10, 4];
 
 var point = new Path.Circle(view.center, 10);
 point.fillColor = 'black';
