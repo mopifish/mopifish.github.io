@@ -41,3 +41,8 @@ function constrain_point(point, anchor, distance) {
 
 	return result;
 }
+
+
+// Disable scrolling on mobile devices
+function onMouseDown(){}
+function onMouseUp(){}

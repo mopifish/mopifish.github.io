@@ -38,13 +38,13 @@ function onMouseMove(event){
 
 function onMouseDown(event){
 	for (var i = 0; i < segments.length; i++){
-		segments[i].fillColor = '#ffffff00';
+		segments[i].visible = false;
 	}
 }
 
 function onMouseUp(event){
 	for (var i = 0; i < segments.length; i++){
-		segments[i].fillColor = 'black';
+		segments[i].visible = true;
 	}
 }
 
