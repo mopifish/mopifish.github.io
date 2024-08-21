@@ -51,7 +51,6 @@ point.fillColor = 'black';
 var dir_line = new Path.Line(view.center, 10);
 dir_line.strokeColor = 'red';
 
-
 function onMouseMove(event){
 	var mouse_pos = event.point;
 

@@ -1,7 +1,4 @@
-
-
 var constraint_distance = 30;
-
 var num_segments = 5;
 
 var segments = [];
@@ -36,21 +33,31 @@ function onMouseMove(event){
 	
 }
 
-function onMouseDown(event){
-	for (var i = 0; i < segments.length; i++){
-		segments[i].visible = false;
-	}
-}
-
-function onMouseUp(event){
-	for (var i = 0; i < segments.length; i++){
-		segments[i].visible = true;
-	}
-}
-
 function constrain_point(point, anchor, distance) {
 	var distance = Math.min(point.getDistance(anchor), distance);
 	var result = (point - anchor).normalize() * distance + anchor;
 
 	return result;
 }
+
+
+
+
+
+
+// --- Web Only Code
+
+var is_points_shown = true
+
+document.getElementById("ConstrainedChainCheckBox").addEventListener("change", function(event) {
+
+	// This is a slightly hacky work around because
+	// For some reason, I can not get the correct current value of the checkbox.........
+	is_points_shown = ! is_points_shown
+	for (var i = 0; i < segments.length; i++){
+		segments[i].visible = is_points_shown
+	}
+})
+// Disable scrolling on mobile devices
+function onMouseDown(event){}
+function onMouseUp(event){}
