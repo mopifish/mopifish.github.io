@@ -34,8 +34,6 @@ function onMouseMove(event){
 }
 
 function constrain_point(point, anchor, distance) {
-	// Note, at this point I switched to using Paper.js's built in getDistance method
-	var distance = Math.min(point.getDistance(anchor), distance);
 	var result = (point - anchor).normalize() * distance + anchor;
 
 	return result;

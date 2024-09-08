@@ -32,6 +32,7 @@ h1 {
 canvas {
   border:1px solid var(--text-color);
   margin-block: 10px;
+  max-width: max-device-width;
 }
 
 img {

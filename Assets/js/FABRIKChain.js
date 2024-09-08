@@ -66,24 +66,25 @@ function onMouseMove(event){
 	}
 }
 
-// Reveal circles on mouse down
-function onMouseDown(event){
-	for (var i = 0; i < radius_circles.length; i++){
-		radius_circles[i].visible = true;
-	}
-}
-
-
-// Hide circles on mouse up
-function onMouseUp(event){
-	for (var i = 0; i < radius_circles.length; i++){
-		radius_circles[i].visible = false;
-	}
-}
-
 function constrain_point(point, anchor, distance) {
-	var distance = Math.min(point.getDistance(anchor), distance);
 	var result = (point - anchor).normalize() * distance + anchor;
 
 	return result;
 }
+
+
+
+
+// --- Web Only Code
+var is_circles_visible = false;
+document.getElementById("FABRIKChainCheckBox").addEventListener("change", function(event) {
+
+	// This is a slightly hacky work around because
+	// For some reason, I can not get the correct current value of the checkbox.........
+	is_circles_visible = ! is_circles_visible;
+	for (var i = 0; i < radius_circles.length; i++){
+		radius_circles[i].visible = is_circles_visible;
+	}
+})
+function onMouseDown(event){}
+function onMouseUp(event){}

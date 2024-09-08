@@ -9,9 +9,11 @@ var radius_circles = [];
 
 
 for (var i = 0; i < num_segments; i++) {
+	// Create points
 	var new_segment = new Path.Circle(view.center, 3);
 	segments.push(new_segment);
 
+	// Create body segments (overlap points)
 	var new_radius = new Path.Circle(view.center, segment_sizes[i]);
 	new_radius.fillColor = '#636363';
 	new_radius.dashArray = [10, 4];
@@ -36,7 +38,6 @@ function onMouseMove(event){
 }
 
 function constrain_point(point, anchor, distance) {
-	var distance = Math.min(point.getDistance(anchor), distance);
 	var result = (point - anchor).normalize() * distance + anchor;
 
 	return result;
@@ -51,7 +52,6 @@ function constrain_point(point, anchor, distance) {
 
 var is_circles_transparent = false
 var is_points_shown = false
-
 document.getElementById("BodyChainTransparency").addEventListener("change", function(event) {
 
 	// This is a slightly hacky work around because

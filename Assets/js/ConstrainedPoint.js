@@ -17,7 +17,9 @@ function onMouseMove(event){
 }
 
 function constrain_point(point, anchor, distance) {
-	var distance = Math.min(get_vector_length(anchor, point), distance);
+	if (allow_point_inside){
+		distance = Math.min(distance, get_vector_length(anchor, point));
+	}
 	var result = (point - anchor).normalize() * distance + anchor;
 
 	return result;
@@ -28,6 +30,12 @@ function get_vector_length(a, b){
 	var length = Math.sqrt(vector.x*vector.x + vector.y*vector.y);
 	return length;
 }
+
+// --- Web Only Code
+var allow_point_inside = false
+document.getElementById("ConstrainedPointCheckBox").addEventListener("change", function(event) {
+	allow_point_inside = ! allow_point_inside
+})
 
 // Disable scrolling on mobile devices
 function onMouseDown(){}

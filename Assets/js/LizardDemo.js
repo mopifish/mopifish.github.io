@@ -28,7 +28,7 @@ function BodySegment (position, size) {
 	this.constrain_to = function(anchor, distance) {
 		var point = this.position;
 
-		distance = Math.min(point.getDistance(anchor), distance) || 0;
+		distance = distance || 0;
 		var result = (point - anchor).normalize() * distance + anchor;
 
 		this.position = result;

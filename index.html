@@ -37,7 +37,7 @@
       Procedural animation is cool. Lately I've been playing around with a simple procedural animation method, and I found it to be way more interesting than I originally thought. So in an effort to share this fun with the rest of you, I wrote up this blog post explaining how everything works!
     </p>
 
-    <canvas id="LizardDemo1" width="640" height="350" style="border:0px"></canvas> 
+    <canvas id="LizardDemo1" style="border:0px; width:100%; max-width:640px; height:350px"></canvas> 
     <script type="text/paperscript" src = "Assets/js/LizardDemo.js" canvas = "LizardDemo1"></script>
 
     <p>
@@ -47,11 +47,17 @@
     <!-- <p> Finally, this post is primarily focused on the <i> Math and Code</i> behind this method. We will be working heavily with Vectors. While I do try to explain and illustrate the mechanics behind some of the math, a basic understanding of vectors and vector notation is expected. </p> -->
 
     <h1> Constrained Point </h1>
-    <p> This method of procedural animation relies almost entirely on 2D Chain Simulations. One simple way to do a chain simulation is rooted in the idea of the constrained point. </p>
+    <p> This method of procedural animation relies almost entirely on 2D Chain Simulations. One simple way to do a chain simulation is rooted in the idea of the constrained point.</p>
    
     <canvas id="ConstrainedPoint" width="350" height="350"></canvas> 
     <script type="text/javascript" src="paper-full.js"></script>
     <script type="text/paperscript" src = "Assets/js/ConstrainedPoint.js" canvas = "ConstrainedPoint"></script>
+    <br>
+    <label>
+      <input type = "checkbox" checked = "false" id = "ConstrainedPointCheckBox">
+      Allow Point Inside
+    </label>
+    <br><br>
     <details>
       <summary> Math Explanation </summary>
 
@@ -62,10 +68,11 @@
             <li><b> The Constraint Distance</b> is represented by the circle. </li>
           </ul>
 
-        <p> In order to constrain our point to an anchor, we simply have to get the Vector between our two points, and reduce it's length to be within the constraint distance. We then add our new vector to <b>Point A</b> to get our new, constrained, <b>Point P</b> </p>
+        <p> In order to constrain our point to an anchor, we simply have to get the Vector between our two points, and set its length to equal the constraint distance. We then add our new vector to <b>Point A</b> to get our new, constrained, <b>Point P</b> </p>
         <center><image SRC = "Assets/Images/DistanceConstraint.jpg" width = 300px></center>
+        <p><b>Note on Constraint:</b> This particular point is constrained to be a <i>fixed distance</i> from the point at all times. This allows us to both push and pull on the point. You could also constrain the point in other ways, such as allowing it to be inside of the circle but not outside of it.</p>
 
-        <br><br>
+        <br>
         <h3><u><b>So Whats the Actual Math Behind This?</b></u></h3>
 
         <p> First we need to get the vector between the two points, which we can do by subtracting them from eachother. I'll represent this vector with the term <b>->AP</b>.</p>
@@ -93,23 +100,14 @@
         </code>
 
         <p></p>
-        <span> We can then use 
-          <div class="tooltip">Min<div class="top">
-                    <h3>Min/Minimum</h3>
-                    <p>min(a, b) returns the smaller of the two numbers given.</p>
-                    <i></i> 
-              </div></div> 
-            to reduce the length to our constraint distance. This limits <b>Point P</b> to the <i>interior</i> of our circle, as opposed to keeping it exclusively on the perimeter.</p>
-        <code> <b>length</b> = min(<b>length</b>, constraint_distance)</code>
-        
-        <p></p>
-        <span> Now that we have our new length, we need to apply it to <b>->AP</b> to generate our final vector. To do this, we need to 
+        <span> After that we need to
           <div class="tooltip">Normalize<div class="top">
             <h3>Normalization</h3>
             <p>Reducing a Vector's length to 1 so it can represent a Direction. Reducing a Vector to a scale of 1</p>
             <i></i> 
           </div></div> 
-        <b>->AP</b> and multiply it by our new length. I'll represent the normalized version of <b>->AP</b> as <b>^AP</b>.</span>
+        <b>->AP</b> to convert it to a direction. I'll represent the normalized version of <b>->AP</b> as <b>^AP</b>.</span>
+        <p></p>
 
         <code> 
           <u>Vector Normalization Formula</u><br>
@@ -121,10 +119,10 @@
           </details>
         </code>
 
-        <p> Finally we can multiply together our length and direction to get our final vector, which I'll refer to as <b>->APf</b></p>
+        <p> Now that we have the direction we can multiply it by our constraint distance to get our final vector, which I'll refer to as <b>->APf</b></p>
         <code> <b>->APf</b> = <b>^AP</b> * <b>length</b></code>
 
-        <p> And then as our final step, we add our new vector to <b>Point A</b> to generate our final, constrained, <b>Point P</b>, which I'll refer to as <b>Point Pf</b>. </p>
+        <p> And then, as our final step, we add our new vector to <b>Point A</b> to generate our final, constrained, <b>Point P</b>, which I'll refer to as <b>Point Pf</b>. </p>
 
         <code> 
           <u>Constrained Point</u><br>
@@ -142,7 +140,6 @@
       <summary> Code </summary>
 
       <pre><code class=language-javascript>function constrain_point(point, anchor, distance) {
-<!---->    var distance = Math.min(get_vector_length(anchor, point), distance);
 <!---->    var result = (point - anchor).normalize() * distance + anchor;
 
 <!---->    return result; 
@@ -232,9 +229,15 @@
     
 
     <h1> FABRIK Chain </h1>
-    <p> Click to reveal circles of constraint </p>
+    <p> </p>
     <canvas id="FABRIKChain" width="350" height="350"></canvas> 
     <script type="text/paperscript" src = "Assets/js/FABRIKChain.js" canvas = "FABRIKChain"></script>
+    <br>
+    <label>
+      <input type = "checkbox" checked = "false" id = "FABRIKChainCheckBox">
+      Circles of Constraint
+    </label>
+
 
 
     <h1> Point on Circle </h1>
