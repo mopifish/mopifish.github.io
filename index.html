@@ -141,35 +141,32 @@
     <details>
       <summary> Code </summary>
 
-<pre><code class=language-javascript>function constrain_point(point, anchor, distance) {
-  var distance = Math.min(get_vector_length(anchor, point), distance);
-  var result = (point - anchor).normalize() * distance + anchor;
+      <pre><code class=language-javascript>function constrain_point(point, anchor, distance) {
+<!---->    var distance = Math.min(get_vector_length(anchor, point), distance);
+<!---->    var result = (point - anchor).normalize() * distance + anchor;
 
-  return result; 
-}
-</code></pre>
+<!---->    return result; 
+<!---->}
+      </code></pre>
 
-<pre><code class=language-javascript>function get_vector_length(a, b) {
-  /* Anchor and Point are both Paper.js Point classes, 
-  and have store an (X,Y) value. 
-  It is equivalent to a Vector class */
-  var vector = b - a;
-  var length = Math.sqrt(vector.x*vector.x + vector.y*vector.y);
+      <pre><code class=language-javascript>function get_vector_length(a, b) {
+<!---->   /* Anchor and Point are both Paper.js Point classes, 
+<!---->   and store an (X,Y) value. 
+<!---->   It is equivalent to a Vector class */
+<!---->   var vector = b - a;
+<!---->   var length = Math.sqrt(vector.x*vector.x + vector.y*vector.y);
 
-  return length; 
-}
-</code></pre>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pages/Assets/js/ConstrainedPoint.js">Source Code</a></p>
+<!---->   return length; 
+<!---->}
+      </code></pre>
+      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pages/Assets/js/ConstrainedPoint.js">Source Code</a></p>
 
     </details>
   
 
-    
-
-
-
 
     <h1> Constrained Chain </h1>
+    <p> When you create a series of constrained points, you end up with a smoothly flowing chain. </p>
     <canvas id="ConstrainedChain" width="350" height="350"></canvas> 
     <script type="text/paperscript" src = "Assets/js/ConstrainedChain.js" canvas = "ConstrainedChain"></script>
     <br>
@@ -177,10 +174,39 @@
       <input type = "checkbox" checked = "true" id = "ConstrainedChainCheckBox">
       Points
     </label>
+    <br><br>
+    <details>
+      <summary> Code </summary>
+      <pre><code class=language-javascript>// Create a list of points
+<!---->var num_segments = 5;
+
+<!---->var segments = [];
+
+<!---->for (var i = 0; i < num_segments; i++) {
+<!---->  var new_segment = // Create segment...
+<!---->  segments.push(new_segment);
+<!---->}
+      </code></pre>
+      <p> After we have a list of points/segments, we simply go through the list and constrain each point to the previous one. </p>
+      <pre><code class=language-javascript>// Constrain a list of points
+<!---->  for (var i = 1; i < segments.length; i++){
+<!---->    var point = segments[i];
+<!---->    var constraint = segments[i-1];
+
+<!---->    point.position = constrain_point(point.position, constraint.position, constraint_distance);
+
+<!---->    radius_circles[i].position = point.position;
+<!---->  }
+      </code></pre>
+
+      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pages/Assets/js/ConstrainedChain.js">Source Code</a></p>
+    </details>
+
+
 
 
     <h1> Body Chain </h1>
-    <p> Currently every point is constrained within  10 px. This isn't how I did the lizard, and I worry it may confuse understanding</p>
+    <p> Once you have a chain of points, its not hard to attach a circle to each point. If you give each circle a unique radius, you can start to create chains that look like bodies.</p>
     <canvas id="BodyChain" width="350" height="350"></canvas> 
     <script type="text/paperscript" src = "Assets/js/BodyChain.js" canvas = "BodyChain"></script>
     <br>
@@ -192,6 +218,17 @@
       <input type = "checkbox" id = "BodyChainTransparency">
       Transparent
     </label>
+    <br><br>
+    <details>
+      <summary> Code </summary>
+      <p> This code is nearly identical to the previous example. The only difference is we now generate segments from a list of sizes, as opposed to making every segment the same size. </p>
+      <pre><code class=language-javascript>var segment_sizes = [15, 16, 20, 24, 22, 15, 15, 15, 15, 15, 15, 15, 16, 17, 17, 18, 18, 18, 19, 19, 19, 19, 19, 18, 18, 18, 18, 17, 17, 16, 16, 15, 15, 15, 14, 14, 14, 13, 13, 13, 12, 12, 12, 11, 11, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+<!---->var num_segments = segment_sizes.length;</code></pre>
+
+      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pages/Assets/js/BodyChain.js">Source Code</a></p>
+    </details>
+
+
     
 
     <h1> FABRIK Chain </h1>

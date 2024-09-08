@@ -5,7 +5,7 @@ var segments = [];
 var radius_circles = [];
 
 
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < num_segments; i++) {
 	var new_segment = new Path.Circle(view.center, 6);
 	new_segment.fillColor = 'black';
 	segments.push(new_segment);
@@ -34,6 +34,7 @@ function onMouseMove(event){
 }
 
 function constrain_point(point, anchor, distance) {
+	// Note, at this point I switched to using Paper.js's built in getDistance method
 	var distance = Math.min(point.getDistance(anchor), distance);
 	var result = (point - anchor).normalize() * distance + anchor;
 
@@ -42,11 +43,7 @@ function constrain_point(point, anchor, distance) {
 
 
 
-
-
-
 // --- Web Only Code
-
 var is_points_shown = true
 
 document.getElementById("ConstrainedChainCheckBox").addEventListener("change", function(event) {
@@ -58,6 +55,7 @@ document.getElementById("ConstrainedChainCheckBox").addEventListener("change", f
 		segments[i].visible = is_points_shown
 	}
 })
+
 // Disable scrolling on mobile devices
 function onMouseDown(event){}
 function onMouseUp(event){}

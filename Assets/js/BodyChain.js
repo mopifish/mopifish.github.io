@@ -10,7 +10,6 @@ var radius_circles = [];
 
 for (var i = 0; i < num_segments; i++) {
 	var new_segment = new Path.Circle(view.center, 3);
-	//new_segment.fillColor = 'black';
 	segments.push(new_segment);
 
 	var new_radius = new Path.Circle(view.center, segment_sizes[i]);
