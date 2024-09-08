@@ -17,10 +17,16 @@ function onMouseMove(event){
 }
 
 function constrain_point(point, anchor, distance) {
-	var distance = Math.min(point.getDistance(anchor), distance);
+	var distance = Math.min(get_vector_length(anchor, point), distance);
 	var result = (point - anchor).normalize() * distance + anchor;
 
 	return result;
+}
+
+function get_vector_length(a, b){
+	var vector = b - a;
+	var length = Math.sqrt(vector.x*vector.x + vector.y*vector.y);
+	return length;
 }
 
 // Disable scrolling on mobile devices

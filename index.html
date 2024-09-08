@@ -5,9 +5,14 @@
   <title>Mopifish</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 
+  <link rel="stylesheet" href="lib/a11y-light.min.css">
+  <script src="lib/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 
 
 <body>
@@ -27,16 +32,141 @@
 
   <main>
     <h1> #### WEBSITE UNDER CONSTRUCTION #### </h1>
-    TODO:<br>
-    - "bring it all together" lizard demo <br>
-    - Angle Constraints <br>
-    - Parametric equations?
+    <h1> Intro </h1>
+    <p> 
+      Procedural animation is cool. Lately I've been playing around with a simple procedural animation method, and I found it to be way more interesting than I originally thought. So in an effort to share this fun with the rest of you, I wrote up this blog post explaining how everything works!
+    </p>
 
+    <canvas id="LizardDemo1" width="640" height="350" style="border:0px"></canvas> 
+    <script type="text/paperscript" src = "Assets/js/LizardDemo.js" canvas = "LizardDemo1"></script>
+
+    <p>
+      Special thanks to <a href = "https://www.youtube.com/watch?v=qlfh_rv6khY"><b>argonaut</b> on youtube</a> for explaining this method, as well as <a href = "https://zalo.github.io/blog/constraints/">this article</a> by <b>Johnathon Selstad</b> for inspiring me to write this blog post (as well as the style of this post). Finally, special thanks to <a href = "https://x.com/therujik?lang=en"><b>RujiK</b></a> and his game for getting me interested in procedural animation in the first place. All three of these are great sources for understanding this method of procedural animation, and I relied on them heavily throughout this process.
+    </p>
+
+    <!-- <p> Finally, this post is primarily focused on the <i> Math and Code</i> behind this method. We will be working heavily with Vectors. While I do try to explain and illustrate the mechanics behind some of the math, a basic understanding of vectors and vector notation is expected. </p> -->
 
     <h1> Constrained Point </h1>
+    <p> This method of procedural animation relies almost entirely on 2D Chain Simulations. One simple way to do a chain simulation is rooted in the idea of the constrained point. </p>
+   
     <canvas id="ConstrainedPoint" width="350" height="350"></canvas> 
     <script type="text/javascript" src="paper-full.js"></script>
     <script type="text/paperscript" src = "Assets/js/ConstrainedPoint.js" canvas = "ConstrainedPoint"></script>
+    <details>
+      <summary> Math Explanation </summary>
+
+         <p> In the example above </p>
+          <ul>
+            <li><b> The Anchor, Point A,</b> is represented by the mouse cursor </li>
+            <li><b> The Constrained Point, Point P,</b> is represented by the black dot </li> 
+            <li><b> The Constraint Distance</b> is represented by the circle. </li>
+          </ul>
+
+        <p> In order to constrain our point to an anchor, we simply have to get the Vector between our two points, and reduce it's length to be within the constraint distance. We then add our new vector to <b>Point A</b> to get our new, constrained, <b>Point P</b> </p>
+        <center><image SRC = "Assets/Images/DistanceConstraint.jpg" width = 300px></center>
+
+        <br><br>
+        <h3><u><b>So Whats the Actual Math Behind This?</b></u></h3>
+
+        <p> First we need to get the vector between the two points, which we can do by subtracting them from eachother. I'll represent this vector with the term <b>->AP</b>.</p>
+        <code>
+          <u>Vector Formula</u><br>
+           <b>->AP</b> = [P.x - A.x, P.y - A.y]
+            
+           <details>
+            <summary>Why does this work?</summary>
+              <p> A vector is a representation of movement from one point to another. Another way to describe would be the <i>difference</i> between two points. As a result, one point minus another will always equal a vector. </p>
+          </details>
+        </code>
+
+        
+        <p> We can then use the Pythagorean Theorem to get the length of our vector.</p>
+        <code> 
+          <u>Vector Length Formula</u><br>
+          <b>length</b> = sqrt(<b>->AP</b>.x^2 + <b>->AP</b>.y^2) 
+       
+          <details>
+            <summary>Why does this work?</summary>
+              <img src = "Assets/Images/VectorLength.jpg" width = 300px/>
+              <p> When a vector is expressed in [X, Y] notation, it effectively functions as they hypotenuse of a right triangle. Since the pythagorean theorem allows us to get the length of one side of a triangle as long as we know the other two sides, this allows us to get the length of our vector. </p>
+          </details>
+        </code>
+
+        <p></p>
+        <span> We can then use 
+          <div class="tooltip">Min<div class="top">
+                    <h3>Min/Minimum</h3>
+                    <p>min(a, b) returns the smaller of the two numbers given.</p>
+                    <i></i> 
+              </div></div> 
+            to reduce the length to our constraint distance. This limits <b>Point P</b> to the <i>interior</i> of our circle, as opposed to keeping it exclusively on the perimeter.</p>
+        <code> <b>length</b> = min(<b>length</b>, constraint_distance)</code>
+        
+        <p></p>
+        <span> Now that we have our new length, we need to apply it to <b>->AP</b> to generate our final vector. To do this, we need to 
+          <div class="tooltip">Normalize<div class="top">
+            <h3>Normalization</h3>
+            <p>Reducing a Vector's length to 1 so it can represent a Direction. Reducing a Vector to a scale of 1</p>
+            <i></i> 
+          </div></div> 
+        <b>->AP</b> and multiply it by our new length. I'll represent the normalized version of <b>->AP</b> as <b>^AP</b>.</span>
+
+        <code> 
+          <u>Vector Normalization Formula</u><br>
+          <b>^AP</b> = <b>->AP</b>/<b>length</b>
+       
+          <details>
+            <summary>Why does this work?</summary>
+              <p> A vector is comprised of two things: a Direction and a Magnitude. When we reduce the vectors length to 1, we essentialy remove it's magnitude so it functions purely as a direction. In the above formula, we divide the vector by it's own length to reduce its magnitude to 1.</p>
+          </details>
+        </code>
+
+        <p> Finally we can multiply together our length and direction to get our final vector, which I'll refer to as <b>->APf</b></p>
+        <code> <b>->APf</b> = <b>^AP</b> * <b>length</b></code>
+
+        <p> And then as our final step, we add our new vector to <b>Point A</b> to generate our final, constrained, <b>Point P</b>, which I'll refer to as <b>Point Pf</b>. </p>
+
+        <code> 
+          <u>Constrained Point</u><br>
+          <b>Point Pf</b> = <b>->APf</b> + <b>Point A</b>
+       
+          <details>
+            <summary>Why does this work?</summary>
+              <p> A vector is a representation of movement. We got the movement from <b>Point A</b> to <b>Point P</b> in the beginning, and then reduced the distance moved without changing the direction. If we then start at <b>Point A</b> and follow our new Vector, we'll arrive at where <b>Point P</b> would be if it was constrained to our circle.</p>
+          </details>
+        </code>
+
+        <p> If you would lke to see this executed practically, and in once concise step, view the code below</p>
+    </details>
+    <details>
+      <summary> Code </summary>
+
+<pre><code class=language-javascript>function constrain_point(point, anchor, distance) {
+  var distance = Math.min(get_vector_length(anchor, point), distance);
+  var result = (point - anchor).normalize() * distance + anchor;
+
+  return result; 
+}
+</code></pre>
+
+<pre><code class=language-javascript>function get_vector_length(a, b) {
+  /* Anchor and Point are both Paper.js Point classes, 
+  and have store an (X,Y) value. 
+  It is equivalent to a Vector class */
+  var vector = b - a;
+  var length = Math.sqrt(vector.x*vector.x + vector.y*vector.y);
+
+  return length; 
+}
+</code></pre>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pages/Assets/js/ConstrainedPoint.js">Source Code</a></p>
+
+    </details>
+  
+
+    
+
+
 
 
     <h1> Constrained Chain </h1>
@@ -91,8 +221,8 @@
     <h1> Bringing It All Together </h1>
     <canvas id="LizardDemo" width="350" height="350"></canvas> 
     <script type="text/paperscript" src = "Assets/js/LizardDemo.js" canvas = "LizardDemo"></script>
-
   </main>
+
 
 
 </body>

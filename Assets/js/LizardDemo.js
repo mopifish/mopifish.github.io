@@ -81,7 +81,6 @@ function SegmentChain(seg_sizes, target, render_shape) {
 		} else if (this.render_shape == "LINE") {
 
 			if (i == seg_sizes.length-1) { continue; }
-			console.log(this.shapes);
 			shape = new Path.Line({
 				from: view.center,
 				to: view.center,
@@ -198,6 +197,8 @@ function Creature(body, color){
 }
 
 
+
+
 var lizard = new Creature(new SegmentChain(
 	[4, 6, 8, 12, 8, 8, 10, 12, 14, 14, 12, 8, 8, 6, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
 ));
@@ -207,6 +208,7 @@ function add_arm(segment, side){
 		center: view.center,
 		radius: 5,
 		fillColor: 'red',
+		visible: false,
 	});
 	lizard.add_attachment(segment - 3, step_target, side, 30);
 	lizard.add_limb(
@@ -215,7 +217,7 @@ function add_arm(segment, side){
 		side,
 		0,
 		step_target,
-		60
+		40
 	);
 }
 
@@ -231,7 +233,6 @@ function onMouseMove(event){
 	lizard.move_to(mouse_pos);
 	
 }
-
 
 // Disable scrolling on mobile devices
 function onMouseDown(){}
