@@ -28,9 +28,27 @@ for (var i = 0; i < 5; i++) {
 	lines.push(line);
 }
 
+var mouse_pos;
 function onMouseMove(event){
-	var mouse_pos = event.point;
+	mouse_pos = event.point;
+	if (!is_manual){
+		constrain_chain();
+	}
+}
 
+function onMouseDown(event){
+	if (is_manual){
+		constrain_chain();
+	}
+}
+
+function constrain_point(point, anchor, distance) {
+	var result = (point - anchor).normalize() * distance + anchor;
+
+	return result;
+}
+
+function constrain_chain(){
 	// Set position of first segment to follow mouse
 	segments[0].position = mouse_pos;
 
@@ -66,17 +84,11 @@ function onMouseMove(event){
 	}
 }
 
-function constrain_point(point, anchor, distance) {
-	var result = (point - anchor).normalize() * distance + anchor;
-
-	return result;
-}
-
-
 
 
 // --- Web Only Code
 var is_circles_visible = false;
+var is_manual = false;
 document.getElementById("FABRIKChainCheckBox").addEventListener("change", function(event) {
 
 	// This is a slightly hacky work around because
@@ -86,5 +98,10 @@ document.getElementById("FABRIKChainCheckBox").addEventListener("change", functi
 		radius_circles[i].visible = is_circles_visible;
 	}
 })
-function onMouseDown(event){}
+document.getElementById("FABRIKChainManualCheckBox").addEventListener("change", function(event) {
+
+	// This is a slightly hacky work around because
+	// For some reason, I can not get the correct current value of the checkbox.........
+	is_manual = ! is_manual;
+})
 function onMouseUp(event){}

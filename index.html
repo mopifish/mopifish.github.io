@@ -44,8 +44,6 @@
       Special thanks to <a href = "https://www.youtube.com/watch?v=qlfh_rv6khY"><b>argonaut</b> on youtube</a> for explaining this method, as well as <a href = "https://zalo.github.io/blog/constraints/">this article</a> by <b>Johnathon Selstad</b> for inspiring me to write this blog post (as well as the style of this post). Finally, special thanks to <a href = "https://x.com/therujik?lang=en"><b>RujiK</b></a> and his game for getting me interested in procedural animation in the first place. All three of these are great sources for understanding this method of procedural animation, and I relied on them heavily throughout this process.
     </p>
 
-    <!-- <p> Finally, this post is primarily focused on the <i> Math and Code</i> behind this method. We will be working heavily with Vectors. While I do try to explain and illustrate the mechanics behind some of the math, a basic understanding of vectors and vector notation is expected. </p> -->
-
     <h1> Constrained Point </h1>
     <p> This method of procedural animation relies almost entirely on 2D Chain Simulations. One simple way to do a chain simulation is rooted in the idea of the constrained point.</p>
    
@@ -229,14 +227,39 @@
     
 
     <h1> FABRIK Chain </h1>
-    <p> </p>
+    <p> To go from a snake to a lizard, we're gonna need some legs. This Inverse Kinematic chain will serve as the  "bones" of our lizard legs.</p>
     <canvas id="FABRIKChain" width="350" height="350"></canvas> 
     <script type="text/paperscript" src = "Assets/js/FABRIKChain.js" canvas = "FABRIKChain"></script>
     <br>
     <label>
-      <input type = "checkbox" checked = "false" id = "FABRIKChainCheckBox">
+      <input type = "checkbox" id = "FABRIKChainCheckBox">
       Circles of Constraint
     </label>
+    <br>
+    <label>
+      <input type = "checkbox" id = "FABRIKChainManualCheckBox">
+      Solve Manually (On Mouse Click)
+    </label>
+    <br><br>
+    <details>
+      <summary> Math Explanation </summary>
+      <p> 
+
+        https://www.youtube.com/watch?app=desktop&v=UNoX65PRehA
+        
+      FABRIK, or Forwards and Backward Inverse Kinematics, is a technique where we constrain our chain to a target point (like in our earlier example) and then constrain it to it's anchor point by constraining every point to the point before it. This gives us a close approximation. If we repeat this process several times, we get a fairly accurate solution. </p>
+      <p> In the above example, I solve the chain using FABRIK continuously, or every frame, so we get a constantly accurate result. If you want to see what a single solution looks like, check the "Solve Manually" box and click your mouse to solve the chain one step at a time.</p>
+
+      <br>
+      <h3><u><b>So Whats the Actual Math Behind This?</b></u></h3>
+      <p> A Kinematic Chain is basically an assembly of objects connected by joints. Your arm is an example of a kinematic chain, where the objects are your bones and the joints are your shoulder/wrist/elbow. Our earlier constrained chain was also a kinematic chain. The dots represented our joints, and you can think of the circles as the "objects" linked together by these joints. </p>
+      <p> There are two types of Kinematic Chains. <b> Forward Kinematic</b> chains and <b> Inverse Kinematic Chains</b>. </p>
+      <p> A <b>Forward Kinematic</b> (FK) chain is a chain where you solve for the position of the objects based on the rotation of the joints. In simpler terms, its a chain where you individually move each joint in order to pose the arm. Thing of a small wooden mannequin, or an action figure.</p>
+      <p> An <b> Inverse Kinematic</b> (IK) chain is a chain where you solve for the rotation of the joints based on the position of the objects. This type of chain is much more useful in game development because it allows us to set a target position and the chain will automatically orient itself to reach that position. Think of your own arm when you're reaching for something as an IK chain.
+    </details>
+    <details>
+      <summary> Code </summary>
+    </details>
 
 
 
