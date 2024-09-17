@@ -17,7 +17,7 @@
 
 <body>
   <header>
-    <h1><a href="index.html">mopifish.github.io</a></h1>
+    <h1><a href="/index.html">mopifish.github.io</a></h1>
 
     <nav>
         |
@@ -38,7 +38,7 @@
     </p>
 
     <canvas id="LizardDemo1" style="border:0px; width:100%; max-width:640px; height:350px"></canvas> 
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/LizardDemo.js" canvas = "LizardDemo1"></script>
+    <script type="text/paperscript" src = "Assets/js/LizardDemo.js" canvas = "LizardDemo1"></script>
 
     <p>
       Special thanks to <a href = "https://www.youtube.com/watch?v=qlfh_rv6khY"><b>argonaut</b> on youtube</a> for explaining this method, as well as <a href = "https://zalo.github.io/blog/constraints/">this article</a> by <b>Johnathon Selstad</b> for inspiring me to write this blog post (as well as the style of this post). Finally, special thanks to <a href = "https://x.com/therujik?lang=en"><b>RujiK</b></a> and his game for getting me interested in procedural animation in the first place. All three of these are great sources for understanding this method of procedural animation, and I relied on them heavily throughout this process.
@@ -49,7 +49,7 @@
    
     <canvas id="ConstrainedPoint" width="350" height="350"></canvas> 
     <script type="text/javascript" src="/paper-full.js"></script>
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/ConstrainedPoint.js" canvas = "ConstrainedPoint"></script>
+    <script type="text/paperscript" src = "Assets/js/ConstrainedPoint.js" canvas = "ConstrainedPoint"></script>
     <br>
     <label>
       <input type = "checkbox" unchecked id = "ConstrainedPointCheckBox" autocomplete="off">
@@ -67,7 +67,7 @@
           </ul>
 
         <p> In order to constrain our point to an anchor, we simply have to get the Vector between our two points, and set its length to equal the constraint distance. We then add our new vector to <b>Point A</b> to get our new, constrained, <b>Point P</b> </p>
-        <center><image SRC = "/Assets/ProceduralAnimationGuide/Images/DistanceConstraint.jpg" width = 300px></center>
+        <center><image SRC = "Assets/Images/DistanceConstraint.jpg" width = 300px></center>
         <p><b>Note on Constraint:</b> This particular point is constrained to be a <i>fixed distance</i> from the point at all times. This allows us to both push and pull on the point. You could also constrain the point in other ways, such as allowing it to be inside of the circle but not outside of it.</p>
 
         <br>
@@ -92,7 +92,7 @@
        
           <details>
             <summary>Why does this work?</summary>
-              <img src = "/Assets/ProceduralAnimationGuide/Images/VectorLength.jpg" width = 300px/>
+              <img src = "Assets/Images/VectorLength.jpg" width = 300px/>
               <p> When a vector is expressed in [X, Y] notation, it effectively functions as they hypotenuse of a right triangle. Since the pythagorean theorem allows us to get the length of one side of a triangle as long as we know the other two sides, this allows us to get the length of our vector. </p>
           </details>
         </code>
@@ -154,7 +154,7 @@
 <!---->   return length; 
 <!---->}
       </code></pre>
-      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pages/Assets/ProceduralAnimationGuide/js/ConstrainedPoint.js">Source Code</a></p>
+      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pagesAssets/js/ConstrainedPoint.js">Source Code</a></p>
 
     </details>
   
@@ -163,7 +163,7 @@
     <h1> Constrained Chain </h1>
     <p> When you create a series of constrained points, you end up with a smoothly flowing chain. </p>
     <canvas id="ConstrainedChain" width="350" height="350"></canvas> 
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/ConstrainedChain.js" canvas = "ConstrainedChain"></script>
+    <script type="text/paperscript" src = "Assets/js/ConstrainedChain.js" canvas = "ConstrainedChain"></script>
     <br>
     <label>
       <input type = "checkbox" checked id = "ConstrainedChainCheckBox" autocomplete="off">
@@ -194,7 +194,7 @@
 <!---->  }
       </code></pre>
 
-      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pages/Assets/ProceduralAnimationGuide/js/ConstrainedChain.js">Source Code</a></p>
+      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pagesAssets/js/ConstrainedChain.js">Source Code</a></p>
     </details>
 
 
@@ -203,7 +203,7 @@
     <h1> Body Chain </h1>
     <p> Once you have a chain of points, its not hard to attach a circle to each point. If you give each circle a unique radius, you can start to create chains that look like bodies.</p>
     <canvas id="BodyChain" width="350" height="350"></canvas> 
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/BodyChain.js" canvas = "BodyChain"></script>
+    <script type="text/paperscript" src = "Assets/js/BodyChain.js" canvas = "BodyChain"></script>
     <br>
     <label>
       <input type = "checkbox" unchecked id = "BodyChainPoints" autocomplete="off">
@@ -221,7 +221,7 @@
       <pre><code class=language-javascript>var segment_sizes = [15, 16, 20, 24, 22, 15, 15, 15, 15, 15, 15, 15, 16, 17, 17, 18, 18, 18, 19, 19, 19, 19, 19, 18, 18, 18, 18, 17, 17, 16, 16, 15, 15, 15, 14, 14, 14, 13, 13, 13, 12, 12, 12, 11, 11, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 <!---->var num_segments = segment_sizes.length;</code></pre>
 
-      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pages/Assets/ProceduralAnimationGuide/js/BodyChain.js">Source Code</a></p>
+      <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/mopifish/mopifish.github.io/blob/gh-pagesAssets/js/BodyChain.js">Source Code</a></p>
     </details>
 
 
@@ -230,7 +230,7 @@
     <h1> FABRIK Chain </h1>
     <p> To go from a snake to a lizard, we're gonna need some legs. This Inverse Kinematic chain will serve as the  "bones" of our lizard legs.</p>
     <canvas id="FABRIKChain" width="350" height="350"></canvas> 
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/FABRIKChain.js" canvas = "FABRIKChain"></script>
+    <script type="text/paperscript" src = "Assets/js/FABRIKChain.js" canvas = "FABRIKChain"></script>
     <br>
     <label>
       <input type = "checkbox" unchecked id = "FABRIKChainCheckBox" autocomplete="off">
@@ -253,7 +253,7 @@
       <p> There are two types of Kinematic Chains. <b> Forward Kinematic</b> chains and <b> Inverse Kinematic Chains</b>. </p>
       <p> A <b>Forward Kinematic</b> (FK) chain is a chain where you solve for the position of the objects based on the rotation of the joints. In simpler terms, its a chain where you individually move each joint in order to pose the arm. Thing of a small wooden mannequin, or an action figure.</p>
       <p> An <b> Inverse Kinematic</b> (IK) chain is a chain where you solve for the rotation of the joints based on the position of the objects. This type of chain is much more useful in game development because it allows us to set a target position and the chain will automatically orient itself to reach that position. Think of your own arm when you're reaching for something as an IK chain.</p>
-      <center><img SRC="/Assets/ProceduralAnimationGuide/Images/FabrikAnimation.gif" width = 400px></center>
+      <center><img SRC="Assets/Images/FabrikAnimation.gif" width = 400px></center>
       <p> I made this animated example to demonstrate whats happening during the Forwards and Backwards parts of FABRIK. </p>
       <p> I also reccomend <a href="https://www.youtube.com/watch?app=desktop&v=UNoX65PRehA"> this video by EgoMoose</a> if you want some further demonstration of what we're doing in this step. </p> 
     </details>
@@ -265,29 +265,29 @@
 
     <h1> Point on Circle </h1>
     <canvas id="PointOnCircle" width="350" height="350"></canvas> 
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/PointOnCircle.js" canvas = "PointOnCircle"></script>
+    <script type="text/paperscript" src = "Assets/js/PointOnCircle.js" canvas = "PointOnCircle"></script>
 
 
     <h1> Body Attachments </h1>
     <p>I think I shall name him Frolo</p>
     <canvas id="BodyAttachments" width="350" height="350"></canvas> 
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/BodyAttachments.js" canvas = "BodyAttachments"></script>
+    <script type="text/paperscript" src = "Assets/js/BodyAttachments.js" canvas = "BodyAttachments"></script>
 
 
     <h1> Stepping Legs </h1>
     <p> Now lets give our body some proper limbs (Yes I'm keeping Frolo here) </p>
     <p> Click to reveal step targets </p>
     <canvas id="SteppingLegs" width="350" height="350"></canvas> 
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/SteppingLegs.js" canvas = "SteppingLegs"></script>
+    <script type="text/paperscript" src = "Assets/js/SteppingLegs.js" canvas = "SteppingLegs"></script>
 
 
     <h1> Bringing It All Together </h1>
     <canvas id="LizardDemo" width="350" height="350"></canvas> 
-    <script type="text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/LizardDemo.js" canvas = "LizardDemo"></script>
+    <script type="text/paperscript" src = "Assets/js/LizardDemo.js" canvas = "LizardDemo"></script>
 
     <h1> Angle Constraint </h1>
     <canvas id = "AngleConstraint" width = "350" height = "350"></canvas>
-    <script type = "text/paperscript" src = "/Assets/ProceduralAnimationGuide/js/AngleConstraint.js" canvas = "AngleConstraint"></script>
+    <script type = "text/paperscript" src = "Assets/js/AngleConstraint.js" canvas = "AngleConstraint"></script>
 
   </main>
 
