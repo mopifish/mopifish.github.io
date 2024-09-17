@@ -48,7 +48,7 @@ var constraint = new BodySegment(view.center, constraint_distance);
 var point = new Path.Circle(view.center, 10);
 point.fillColor = 'black';
 
-var dir_line = new Path.Line(view.center, 10);
+var dir_line = new Path.Line(view.center, view.center);
 dir_line.strokeColor = 'red';
 
 function onMouseMove(event){
