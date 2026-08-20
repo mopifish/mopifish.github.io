@@ -3,54 +3,106 @@
 
 <head>
   <title>Mopifish</title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-
-  <link rel="stylesheet" href="lib/a11y-light.min.css">
-  <script src="lib/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
+  <link rel="stylesheet" type="text/css" href="/dev_style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+  .fade-box {
+    width: 200px;
+    height: 200px;
+    background-color: #3b3b3b;
+    color: white;
+    
+    /* Start hidden and set fade speed */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Fade in when hovered */
+  .fade-box:hover {
+    opacity: 0.8;
+  }
+
+  .icon-box {
+
+    width: 28px;
+    height: 28px;
+    border: 0px;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background-color 0.1s ease;
+    display: block;
+  }
+
+  .icon-box:hover {
+    transition: ;
+    background-color: #e0e0e0;
+  }
+
+  .bounce-text span {
+    display: inline-block;
+    transition: transform 0.1s;
+  }
+  .bounce-text span:hover  {
+    transform: translateY(-2px);
+    transform: rotate(-10deg);
+  }
+
+</style>
 </head>
 
-
-
 <body>
-  <header>
-    <h1><a href="/">mopifish.github.io</a></h1>
+  <header style="line-height:0.4;">
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 30px;">
+      <img src="Assets/tiny-mopi.jpg" width="50px" height="50px" style="border:0px;">
+      <div>
+        <h1 class="bounce-text" style="font-size:25px;"><a href="/"><span>D</span><span>r</span><span>a</span><span>k</span><span>e</span> <span>P</span><span>i</span><span>c</span><span>k</span><span>e</span><span>t</span><span>t</span></a></h1>
+        <p style="font-size:18px;">Tool and Engine Programmer</p>
+      </div>
 
-    <nav>
+      <div style="display:inline-flex; align-items: flex-start; gap: 15px;">
+        <!--  The following icons are wrapped in divs to prevent the references from expanding height inside of the flexbox. This led to the click area being larger than the intended size. --> 
+        <div>
+          <a style="display: block;" target="_blank" rel="noopener noreferrer" href="mailto: pickettdrake302@gmail.com">
+            <img class="icon-box" src="Assets/mail-icon.svg">
+          </a>
+        </div>
+        <div>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/drake-pickett/">
+            <img class="icon-box" src="Assets/linkedin-icon.svg">
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <hr>
+    <nav style="font-size:24px; padding:4px;">
+        <a target="_blank" rel="noopener noreferrer" href="https://x.com/icky_dizzydrake">Home</a>
         |
-        <a target="_blank" rel="noopener noreferrer" href="https://x.com/icky_dizzydrake">twitter</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://mopifish.itch.io/">Resume</a>
         |
-        <a target="_blank" rel="noopener noreferrer" href="https://mopifish.itch.io/">my games</a>
-        |
+        <a target="_blank" rel="noopener noreferrer" href="https://mopifish.itch.io/">About Me!</a>
     </nav>
+    <hr>  
   </header>
 
-  <hr>
-
-  <main>
-    <h1> Welcome to the devroom! </h1>
-    <p> This is my secret testing page </p>
-    <p> Since you managed to find it, leave a comment!</p>
 
 
-    <script src="https://giscus.app/client.js"
-        data-repo="mopifish/mopifish.github.io"
-        data-repo-id="R_kgDOH49rnw"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOH49rn84CiiWQ"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="0"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="light_high_contrast"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
-    </script>
+  <main style="font-size:18px;">
+    <p> Welcome to my portfolio :^) <br>
+      I'm a Tool Programmer with <b>1 Published Game on Steam.</b></p>
+    <p> I love obsessing over the design of workflows and tools that allow us to make games faster!</p>
+
+    <video style="width:100%; max-width:550px; display:block; margin:auto; margin-bottom: 15px;" autoplay muted loop > 
+      <source src = "Assets/trailer.mp4"> 
+    </video>
+    <div class = "wrapper" style = "position: relative;width:200px;height:200px;overflow:hidden;">
+      <img  src="Assets/test.png" style="display:block;width:100%;height:auto;">
+      <div class="fade-box" style="position:absolute;width:100%;height:100%;top:0;left:0;">Hover to see me fade</div>
+    </div>
 
   </main>
 
